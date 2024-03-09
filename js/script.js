@@ -362,6 +362,8 @@ scene.background = new THREE.Color("black");
     "assets/bunny.obj",
     (root) => {
       bunny = root;
+      root.add(new THREE.AxesHelper(30));
+      root.position.set(0, -10, -25);
       scene.add(root);
     },
     () => {},
@@ -385,10 +387,10 @@ async function render() {
   if (bunny != null) {
     if (angleType.value == "euler") {
       let rotationEuler = new THREE.Euler(
-        THREE.MathUtils.degToRad(orientation[0]),
-        THREE.MathUtils.degToRad(orientation[1]),
-        THREE.MathUtils.degToRad(orientation[2]),
-        "XYZ"
+        THREE.MathUtils.degToRad(orientation[2] - 180),
+        THREE.MathUtils.degToRad(orientation[0] - 270),
+        THREE.MathUtils.degToRad(orientation[1] - 180),
+        "YZX"
       );
       bunny.setRotationFromEuler(rotationEuler);
     } else {
