@@ -386,11 +386,12 @@ async function render() {
 
   if (bunny != null) {
     if (angleType.value == "euler") {
+      // ICM-20948
       let rotationEuler = new THREE.Euler(
+        THREE.MathUtils.degToRad(orientation[0] - 180 - 40),
+        THREE.MathUtils.degToRad(orientation[1] - 60),
         THREE.MathUtils.degToRad(orientation[2] - 180),
-        THREE.MathUtils.degToRad(orientation[0] - 270),
-        THREE.MathUtils.degToRad(orientation[1] - 180),
-        "YZX"
+        "ZYX"
       );
       bunny.setRotationFromEuler(rotationEuler);
     } else {
@@ -400,7 +401,7 @@ async function render() {
   }
 
   renderer.render(scene, camera);
-  updateCalibration();
+  // updateCalibration();
 
   await sleep(10); // Allow 10ms for UI updates
   await finishDrawing();
